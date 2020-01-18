@@ -488,9 +488,9 @@ $(window).load(function(){
 					}?>
 					<span class="alert-danger"><?php echo validation_errors(); ?></span>
 				</div>
-				
+				<div>
 					<input type="hidden" name="bill_id" value="<?=$bill_id?>"/>
-					
+					<div class="row">
 						<div class="panel panel-default">
 								<div class="panel-heading">
 									<?= $this->lang->line('search')." ".$this->lang->line('patient');?>
@@ -533,10 +533,9 @@ $(window).load(function(){
 											<?php } ?>
 									</div>
 								</div>
-						</div>
-					
-					<div class="row">
-						<div class="col-md-6">
+							</div>
+						<div class="row">
+						<div class="form-group col-md-6">
 							<label for="patient_name"><?php echo $this->lang->line("doctor");?></label>
 							<?php if(isset($visit_id)){
 									 $doctor_id=$doctor['doctor_id'];?>
@@ -552,7 +551,6 @@ $(window).load(function(){
 							<?php echo form_error('doctor_id','<div class="alert alert-danger">','</div>'); ?>
 						</div>
 					</div>
-					
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="bill_date"><?php echo $this->lang->line("date");?></label>
@@ -579,11 +577,11 @@ $(window).load(function(){
 					</div>
 
 
-            
+            <div class="row">
 					<div class="panel panel-primary">
 						<div class="panel-body table-responsive-60">
 								<div class="form-group">
-									<div class="row">
+									<div class="col-md-12">
 										<div class="col-md-3">
 											<?php echo $this->lang->line("particular");?>
 											<input type="hidden" name="action" value="particular">
@@ -616,7 +614,7 @@ $(window).load(function(){
 								</div>
 								<?php if (in_array("stock",$active_modules)) { ?>
 								<div class="form-group">
-									<div class="row">
+									<div class="col-md-12">
 										<div class="col-md-3">
 											<?php echo $this->lang->line("item");?>
 											<input type="hidden" name="action" value="item">
@@ -648,7 +646,7 @@ $(window).load(function(){
 								<?php if (in_array("doctor",$active_modules)) {?>
 								<div id="fees_section">
 								<div class="form-group">
-									<div class="row">
+									<div class="col-md-12">
 										<div class="col-md-3">
 											<?php echo $this->lang->line("fees");?>
 											<input type="hidden" name="action" value="fees">
@@ -671,7 +669,7 @@ $(window).load(function(){
 								<?php }?>
 								<?php if (in_array("treatment",$active_modules)) {?>
 								<div class="form-group">
-									<div class="row">
+									<div class="col-md-12">
 										<div class="col-md-3">
 											<?php echo $this->lang->line("treatment");?>
 											<input type="hidden" name="action" value="treatment">
@@ -741,12 +739,12 @@ $(window).load(function(){
 
 								<?php } ?>
 								<div class="form-group">
-									<div class="row">
+									<div class="col-md-12">
 										<div class="col-md-3">
 											<?php echo $this->lang->line("discount");?>
 											<input name="discount" id="discount" class="form-control" value=""/>
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-3">
 											<?php if (in_array("doctor", $active_modules)) { ?>
 											<?php echo $this->lang->line("foc");?>
 											<input type="checkbox" name="foc" id="foc" class="form-control" value=""/>
@@ -761,7 +759,7 @@ $(window).load(function(){
 								<?php if($tax_type == "bill"){?>
 
 								<div class="form-group">
-									<div class="row">
+									<div class="col-md-12">
 										<div class="col-md-3">
 											<?php echo $this->lang->line("tax");?>
 											<select name="bill_tax_rate" class="form-control" id="bill_tax_rate">
@@ -770,7 +768,7 @@ $(window).load(function(){
 												<?php } ?>
 											</select>
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-3">
 											<?php echo $this->lang->line("percentage");?>
 											<input type="text" style="text-align:right;" name="bill_tax_amount" id="bill_tax_amount" class="form-control" readonly />
 										</div>

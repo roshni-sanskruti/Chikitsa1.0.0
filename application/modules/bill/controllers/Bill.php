@@ -460,8 +460,16 @@ class Bill extends CI_Controller {
 
 			$tax_type = $this->settings_model->get_data_value('tax_type');
 			$data['tax_type'] = $tax_type;
-			$header_data = get_header_data();
-			
+			$user_id = $this->session->userdata('user_id');
+			$clinic_id = $this->session->userdata('clinic_id');
+			$header_data['clinic_id'] = $clinic_id;
+			$header_data['clinic'] = $this->settings_model->get_clinic($clinic_id);
+			$header_data['active_modules'] = $this->module_model->get_active_modules();
+			$header_data['user_id'] = $user_id;
+			$header_data['user'] = $this->admin_model->get_user($user_id);
+			$header_data['login_page'] = get_main_page();
+	        $header_data['software_name']= $this->settings_model->get_data_value("software_name");
+
 			if($tax_type == "item"){
 				$data['tax_report'] = $this->bill_model->get_tax_report($from_date,$to_date);
 			}elseif($tax_type == "bill"){

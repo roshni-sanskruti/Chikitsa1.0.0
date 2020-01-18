@@ -98,11 +98,17 @@ class Payment extends CI_Controller {
 						$this->load->model('sessions/sessions_model');
 						$data['sessions'] = $this->sessions_model->get_sessions();
 					}
-					// $clinic_id = $this->session->userdata('clinic_id');
-					// $user_id = $this->session->userdata('user_id');
-					$header_data = get_header_data();
+					$clinic_id = $this->session->userdata('clinic_id');
+					$user_id = $this->session->userdata('user_id');
+					$header_data['clinic_id'] = $clinic_id;
+					$header_data['clinic'] = $this->settings_model->get_clinic($clinic_id);
+					$header_data['active_modules'] = $active_modules;
+					$header_data['user_id'] = $user_id;
+					$header_data['user'] = $this->admin_model->get_user($user_id);
+					$header_data['login_page'] = get_main_page();
+                    $header_data['software_name']= $this->settings_model->get_data_value("software_name");
+
 					$this->load->view('templates/header',$header_data);
-					
 					$this->load->view('templates/menu');
 					$this->load->view('form',$data);
 					$this->load->view('templates/footer');
@@ -141,8 +147,17 @@ class Payment extends CI_Controller {
 			$data['pending_payments'] = $this->payment_model->get_pending_payments();
 			$data['def_dateformate'] = $this->settings_model->get_date_formate();
 			$data['currency_postfix'] = $this->settings_model->get_currency_postfix();
-			$header_data = get_header_data();
-			$this->load->view('templates/header',$header_data);			
+			$clinic_id = $this->session->userdata('clinic_id');
+			$user_id = $this->session->userdata('user_id');
+			$header_data['clinic_id'] = $clinic_id;
+			$header_data['clinic'] = $this->settings_model->get_clinic($clinic_id);
+			$header_data['active_modules'] = $this->module_model->get_active_modules();
+			$header_data['user_id'] = $user_id;
+			$header_data['user'] = $this->admin_model->get_user($user_id);
+			$header_data['login_page'] = get_main_page();
+            $header_data['software_name']= $this->settings_model->get_data_value("software_name");
+
+			$this->load->view('templates/header',$header_data);
 			$this->load->view('templates/menu');
 			$this->load->view('pending_payments',$data);
 			$this->load->view('templates/footer');
@@ -226,10 +241,21 @@ class Payment extends CI_Controller {
 		if (!$this->session->userdata('user_name') || $this->session->userdata('user_name') == '') {
             redirect('login/index');
         } else {
+
+			$clinic_id = $this->session->userdata('clinic_id');
+			$user_id = $this->session->userdata('user_id');
+			$header_data['clinic_id'] = $clinic_id;
+			$header_data['clinic'] = $this->settings_model->get_clinic($clinic_id);
+			$header_data['active_modules'] = $this->module_model->get_active_modules();
+			$header_data['user_id'] = $user_id;
+			$header_data['user'] = $this->admin_model->get_user($user_id);
+			$header_data['login_page'] = get_main_page();
+            $header_data['software_name']= $this->settings_model->get_data_value("software_name");
+
 			$data['patient_name'] = $this->patient_model->get_patient_name();
+
 			$data['def_dateformate'] = $this->settings_model->get_date_formate();
 			$data['refunds'] = $this->payment_model->get_refunds();
-			$header_data = get_header_data();
 			$this->load->view('templates/header',$header_data);
 			$this->load->view('templates/menu');
 			$this->load->view('issue_refund',$data);
@@ -249,7 +275,17 @@ class Payment extends CI_Controller {
 				$data['def_dateformate'] = $this->settings_model->get_date_formate();
 				$data['currency_postfix'] = $this->settings_model->get_currency_postfix();
 				$data['currency_symbol'] = $this->settings_model->get_currency_symbol();
-				$header_data = get_header_data();
+
+				$clinic_id = $this->session->userdata('clinic_id');
+				$user_id = $this->session->userdata('user_id');
+				$header_data['clinic_id'] = $clinic_id;
+				$header_data['clinic'] = $this->settings_model->get_clinic($clinic_id);
+				$header_data['active_modules'] = $this->module_model->get_active_modules();
+				$header_data['user_id'] = $user_id;
+				$header_data['user'] = $this->admin_model->get_user($user_id);
+				$header_data['login_page'] = get_main_page();
+                $header_data['software_name']= $this->settings_model->get_data_value("software_name");
+
 				$this->load->view('templates/header',$header_data);
 				$this->load->view('templates/menu');
 				$this->load->view('issue_refund_form',$data);
@@ -302,7 +338,16 @@ class Payment extends CI_Controller {
 	}
 
 	public function payment_methods(){
-		$header_data = get_header_data();
+		$clinic_id = $this->session->userdata('clinic_id');
+		$user_id = $this->session->userdata('user_id');
+
+		$header_data['clinic_id'] = $clinic_id;
+		$header_data['clinic'] = $this->settings_model->get_clinic($clinic_id);
+		$header_data['active_modules'] = $this->module_model->get_active_modules();
+		$header_data['user_id'] = $user_id;
+		$header_data['user'] = $this->admin_model->get_user($user_id);
+		$header_data['login_page'] = get_main_page();
+        $header_data['software_name']= $this->settings_model->get_data_value("software_name");
 
 		$data['payment_methods'] = $this->settings_model->get_payment_methods();
 		$this->load->view('templates/header',$header_data);

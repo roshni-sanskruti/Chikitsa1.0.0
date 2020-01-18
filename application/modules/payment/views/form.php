@@ -471,17 +471,14 @@
 </script>
 
 <div id="page-inner">
-	
-		
-		
+	<div class="row">
+		<div class="col-md-12">
 			<div class="panel panel-primary">
-				
 				<div class="panel-heading">
-						
+					<div class="row">
 						<h2><?php echo $this->lang->line("payment_form");?></h2>
-					
+					</div>
 				</div>
-				
 				<div class="panel-body">
 					<?php if($payment_status == 'rejected'){ ?>
 							<div class='alert alert-danger'><?php echo $this->lang->line('this_payment_is_rejected');?></div>
@@ -507,7 +504,6 @@
 								</div>
 
 								<div class="panel-body table-responsive-15">
-								<div class="row">
 					
 									<div class="col-md-3">
 										<label for="display_id"><?php echo $this->lang->line('patient_id');?></label>
@@ -526,7 +522,6 @@
 										<label for="phone"><?php echo $this->lang->line('mobile');?></label>
 										<input type="text" <?php if(isset($patient)){echo "readonly";}?> name="phone_number" id="phone_number" value="<?php if(isset($patient)){echo $patient['phone_number']; } ?>" class="form-control"/>
 									</div>
-								</div>
 								</div>
 							</div>
 							<input type="hidden" name="patient_id" id="patient_id" value="<?= $patient_id; ?>" />
@@ -614,7 +609,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="row">
+					<div class="col-md-12">
 						<div class="form-group">
 							<label for="title"><?=$this->lang->line('adjust_from_account');?></label>
 							<div class="checkbox">
